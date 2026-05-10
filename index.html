@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QuickSort Algorithm Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Sora:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div class="hero__glow"></div>
+        <div class="hero__content">
+          <p class="eyebrow">Algorithm Lab</p>
+          <h1>QuickSort Algorithm Lab</h1>
+          <p class="subtitle">
+            Explore, test, and benchmark QuickSort with a modern interface that
+            makes algorithm behavior easy to see and compare.
+          </p>
+          <div class="hero__tags">
+            <span class="tag">Recursive</span>
+            <span class="tag">Iterative</span>
+            <span class="tag">Benchmarking</span>
+            <span class="tag">Testing</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="container">
+        <section class="card reveal" style="--delay: 0.05s">
+          <div class="card__header">
+            <div>
+              <h2>Input Workspace</h2>
+              <p class="muted">
+                Enter numbers separated by commas to sort and analyze.
+              </p>
+            </div>
+            <div
+              class="status"
+              id="input-status"
+              role="status"
+              aria-live="polite"
+            ></div>
+          </div>
+
+          <form id="sort-form" class="input-grid">
+            <div class="field">
+              <label for="numbers-input">Numbers</label>
+              <textarea
+                id="numbers-input"
+                name="numbers"
+                placeholder="5, 3, 8, 1, 2"
+                rows="4"
+              ></textarea>
+              <p class="helper">
+                Supports negatives, duplicates, and mixed values.
+              </p>
+            </div>
+
+            <div class="field">
+              <label for="algorithm-select">Sorting Method</label>
+              <select id="algorithm-select" name="algorithm">
+                <option value="recursive">Recursive QuickSort</option>
+                <option value="iterative">Iterative QuickSort</option>
+                <option value="builtin">Built-in JavaScript Sort</option>
+              </select>
+              <div class="button-row">
+                <button class="btn primary" type="submit">Sort Numbers</button>
+                <button class="btn" type="button" id="run-tests">
+                  Run Tests
+                </button>
+                <button class="btn" type="button" id="generate-random">
+                  Generate Random Array
+                </button>
+              </div>
+            </div>
+          </form>
+        </section>
+
+        <section class="card reveal" style="--delay: 0.1s">
+          <div class="card__header">
+            <div>
+              <h2>Sort Results</h2>
+              <p class="muted">Track algorithm output and execution time.</p>
+            </div>
+          </div>
+          <div class="result-grid">
+            <div class="result-item">
+              <span class="label">Original Array</span>
+              <div class="code-block" id="result-original">-</div>
+            </div>
+            <div class="result-item">
+              <span class="label">Sorted Array</span>
+              <div class="code-block" id="result-sorted">-</div>
+            </div>
+            <div class="result-item">
+              <span class="label">Selected Algorithm</span>
+              <div class="pill" id="result-algorithm">-</div>
+            </div>
+            <div class="result-item">
+              <span class="label">Execution Time</span>
+              <div class="pill" id="result-time">-</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card reveal" style="--delay: 0.15s">
+          <div class="card__header">
+            <div>
+              <h2>Benchmark Comparison</h2>
+              <p class="muted">
+                Compare recursive, iterative, and built-in performance.
+              </p>
+            </div>
+          </div>
+          <div class="table">
+            <div class="table__row table__header">
+              <span>Algorithm</span>
+              <span>Time (ms)</span>
+            </div>
+            <div class="table__body" id="benchmark-results">
+              <div class="table__row">
+                <span class="muted">Run a sort to see benchmark data.</span>
+                <span class="muted">-</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card reveal" style="--delay: 0.2s">
+          <div class="card__header">
+            <div>
+              <h2>Test Results</h2>
+              <p class="muted">
+                Validate QuickSort correctness with built-in sort.
+              </p>
+            </div>
+          </div>
+          <div id="test-results" class="test-list">
+            <div class="test-item muted">
+              Run tests to see detailed results.
+            </div>
+          </div>
+        </section>
+
+        <section class="card split reveal" style="--delay: 0.25s">
+          <div>
+            <h2>QuickSort Complexity</h2>
+            <ul class="info-list">
+              <li><strong>Best case:</strong> O(n log n)</li>
+              <li><strong>Average case:</strong> O(n log n)</li>
+              <li>
+                <strong>Worst case:</strong> O(n^2) (rare with good pivots)
+              </li>
+              <li><strong>Space:</strong> O(log n) for recursion depth</li>
+            </ul>
+          </div>
+          <div>
+            <h2>Algorithm Comparison</h2>
+            <div class="table">
+              <div class="table__row table__header">
+                <span>Algorithm</span>
+                <span>Notes</span>
+              </div>
+              <div class="table__row">
+                <span>QuickSort</span>
+                <span>Fast in practice, in-place, pivot sensitive.</span>
+              </div>
+              <div class="table__row">
+                <span>MergeSort</span>
+                <span>Stable, O(n log n), needs extra memory.</span>
+              </div>
+              <div class="table__row">
+                <span>HeapSort</span>
+                <span>O(n log n), in-place, not stable.</span>
+              </div>
+              <div class="table__row">
+                <span>Built-in Sort</span>
+                <span>Highly optimized, varies by engine.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">Developed for QuickSort Lab Assignment</footer>
+    </div>
+
+    <script src="js/quicksort.js" defer></script>
+    <script src="js/benchmark.js" defer></script>
+    <script src="js/tests.js" defer></script>
+    <script src="js/app.js" defer></script>
+  </body>
+</html>
