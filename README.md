@@ -6,7 +6,7 @@
 
 ## GitHub Repository
 
-- https://github.com/<your-username>/QuickSort-Lab
+- [https://github.com/<your-username>/QuickSort-Lab](https://github.com/Mohammedali22541/QuickSort-Lab-Vibe-Coding)
 
 ## Objective
 
