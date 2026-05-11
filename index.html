@@ -17,17 +17,28 @@
       <header class="hero">
         <div class="hero__glow"></div>
         <div class="hero__content">
-          <p class="eyebrow">Algorithm Lab</p>
+          <div class="hero__top">
+            <p class="eyebrow">Algorithm Lab</p>
+            <button
+              class="btn ghost theme-toggle"
+              type="button"
+              id="theme-toggle"
+            >
+              Dark Mode
+            </button>
+          </div>
           <h1>QuickSort Algorithm Lab</h1>
           <p class="subtitle">
             Explore, test, and benchmark QuickSort with a modern interface that
             makes algorithm behavior easy to see and compare.
           </p>
           <div class="hero__tags">
-            <span class="tag">Recursive</span>
-            <span class="tag">Iterative</span>
-            <span class="tag">Benchmarking</span>
-            <span class="tag">Testing</span>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">QuickSort</span>
+            <span class="tag">Benchmark</span>
+            <span class="tag">Tests</span>
           </div>
         </div>
       </header>
@@ -59,7 +70,7 @@
                 rows="4"
               ></textarea>
               <p class="helper">
-                Supports negatives, duplicates, and mixed values.
+                Enter numbers separated by commas, for example: 5, 3, 8, 1, 2
               </p>
             </div>
 
@@ -69,14 +80,39 @@
                 <option value="recursive">Recursive QuickSort</option>
                 <option value="iterative">Iterative QuickSort</option>
                 <option value="builtin">Built-in JavaScript Sort</option>
+                <option value="merge">Merge Sort</option>
+                <option value="heap">Heap Sort</option>
+                <option value="insertion">Insertion Sort</option>
+                <option value="selection">Selection Sort</option>
+                <option value="bubble">Bubble Sort</option>
               </select>
+              <div class="field" style="margin-top: 1rem">
+                <label for="array-size">Random Array Size</label>
+                <select id="array-size" name="array-size">
+                  <option value="small">Small (10)</option>
+                  <option value="medium" selected>Medium (100)</option>
+                  <option value="large">Large (1000)</option>
+                  <option value="xlarge">Extra Large (5000)</option>
+                </select>
+                <p class="helper">Used for random array generation only.</p>
+              </div>
+              <div class="algorithm-info" id="algorithm-info"></div>
               <div class="button-row">
                 <button class="btn primary" type="submit">Sort Numbers</button>
-                <button class="btn" type="button" id="run-tests">
+                <button class="btn primary" type="button" id="validate-input">
+                  Compare Current Input
+                </button>
+                <button class="btn primary" type="button" id="run-tests">
                   Run Tests
                 </button>
                 <button class="btn" type="button" id="generate-random">
                   Generate Random Array
+                </button>
+                <button class="btn" type="button" id="copy-sorted">
+                  Copy Sorted Result
+                </button>
+                <button class="btn ghost" type="button" id="clear-workspace">
+                  Clear
                 </button>
               </div>
             </div>
@@ -107,7 +143,37 @@
               <span class="label">Execution Time</span>
               <div class="pill" id="result-time">-</div>
             </div>
+            <div class="result-item">
+              <span class="label">Array Size</span>
+              <div class="pill" id="result-size">0 values</div>
+            </div>
           </div>
+        </section>
+
+        <section class="card reveal" style="--delay: 0.12s">
+          <div class="card__header">
+            <div>
+              <h2>Array Visualization</h2>
+              <p class="muted">
+                Compare the shape of the original and sorted arrays.
+              </p>
+            </div>
+            <div class="note" id="visual-note"></div>
+          </div>
+          <div class="visual-grid">
+            <div class="visual-block">
+              <span class="label">Original Array</span>
+              <div class="bar-chart" id="visual-original"></div>
+            </div>
+            <div class="visual-block">
+              <span class="label">Sorted Array</span>
+              <div class="bar-chart" id="visual-sorted"></div>
+            </div>
+          </div>
+          <p class="note" id="visual-baseline-note">
+            Bars are normalized by absolute value. Negative values extend below
+            the zero baseline.
+          </p>
         </section>
 
         <section class="card reveal" style="--delay: 0.15s">
@@ -115,7 +181,7 @@
             <div>
               <h2>Benchmark Comparison</h2>
               <p class="muted">
-                Compare recursive, iterative, and built-in performance.
+                Compare QuickSort with additional algorithms side by side.
               </p>
             </div>
           </div>
@@ -131,6 +197,18 @@
               </div>
             </div>
           </div>
+          <div class="benchmark-meta">
+            <div class="pill" id="fastest-algorithm">Fastest Algorithm: -</div>
+            <div class="warning" id="benchmark-warning"></div>
+          </div>
+          <p class="note">
+            Small arrays may show 0.000 ms because the operation is extremely
+            fast in the browser.
+          </p>
+          <p class="note" id="benchmark-variance">
+            Benchmark results may vary depending on browser, device, input size,
+            and current system load.
+          </p>
         </section>
 
         <section class="card reveal" style="--delay: 0.2s">
@@ -142,6 +220,12 @@
               </p>
             </div>
           </div>
+          <div id="input-validation" class="validation-panel"></div>
+          <div class="test-summary" id="test-summary">0 / 0 tests passed</div>
+          <p class="note" id="test-note">
+            Predefined tests use fixed test cases and are independent from the
+            current input field.
+          </p>
           <div id="test-results" class="test-list">
             <div class="test-item muted">
               Run tests to see detailed results.
@@ -160,6 +244,10 @@
               </li>
               <li><strong>Space:</strong> O(log n) for recursion depth</li>
             </ul>
+            <p class="note">
+              Pivot Strategy: <span id="pivot-strategy">Middle element</span>.
+              Balanced pivots reduce recursion depth and improve performance.
+            </p>
           </div>
           <div>
             <h2>Algorithm Comparison</h2>
@@ -193,6 +281,7 @@
     </div>
 
     <script src="js/quicksort.js" defer></script>
+    <script src="js/sortingAlgorithms.js" defer></script>
     <script src="js/benchmark.js" defer></script>
     <script src="js/tests.js" defer></script>
     <script src="js/app.js" defer></script>

@@ -1,8 +1,16 @@
 # QuickSort Algorithm Lab
 
+## Live Demo
+
+- https://<your-username>.github.io/QuickSort-Lab/
+
+## GitHub Repository
+
+- https://github.com/<your-username>/QuickSort-Lab
+
 ## Objective
 
-Build a professional frontend-only lab that implements QuickSort (recursive and iterative), compares it with the built-in JavaScript sort, validates correctness with tests, benchmarks performance, and documents the workflow.
+Build a professional frontend-only lab that implements QuickSort (recursive and iterative), compares multiple sorting algorithms, validates correctness, benchmarks performance, and documents the workflow.
 
 ## Technologies Used
 
@@ -23,6 +31,7 @@ QuickSort-Lab/
 │
 └── js/
     ├── quicksort.js
+    ├── sortingAlgorithms.js
     ├── benchmark.js
     ├── tests.js
     └── app.js
@@ -33,55 +42,93 @@ QuickSort-Lab/
 1. Open `index.html` in a modern browser.
 2. Enter comma-separated numbers in the input area.
 3. Select an algorithm and click "Sort Numbers".
-4. Use "Run Tests" to validate correctness.
+4. Use "Compare Current Input" to compare QuickSort results with built-in sort.
+5. Use "Run Tests" to execute the predefined test suite.
 
 ## Features
 
 - Recursive and iterative QuickSort implementations
-- Built-in JavaScript sort comparison
+- Additional sorting algorithms for comparison
 - Input validation with friendly errors
-- Benchmarking using `performance.now()`
-- Frontend test runner with pass/fail results
-- Responsive, professional UI
+- Benchmarking with `performance.now()`
+- Fastest algorithm detection
+- Frontend test runner with summary and detailed results
+- Current input algorithm comparison report
+- Array visualization for original vs sorted values
+- Responsive, professional light/dark UI
 
-## QuickSort Explanation
+## Sorting Algorithms Implemented
 
-QuickSort is a divide-and-conquer algorithm that selects a pivot, partitions the array into elements less than and greater than the pivot, then recursively sorts the partitions. The iterative version uses an explicit stack to avoid deep recursion.
+- Recursive QuickSort
+- Iterative QuickSort
+- Built-in JavaScript numeric sort
+- Merge Sort
+- Heap Sort
+- Insertion Sort
+- Selection Sort
+- Bubble Sort
 
-## Time and Space Complexity
+## Compare Current Input Feature
 
-- Best case: O(n log n)
-- Average case: O(n log n)
-- Worst case: O(n^2)
-- Space complexity: O(log n) for recursive call stack
+- Compares recursive and iterative QuickSort results with built-in numeric sort.
+- Displays a pass/fail message plus the input and outputs.
+- Uses the current textarea values only.
+- Updates automatically after sorting or generating a random array.
 
-## Comparison: QuickSort vs MergeSort vs HeapSort vs Built-in Sort
+Compare Current Input validates the user's current array by comparing Recursive QuickSort, Iterative QuickSort, and JavaScript built-in numeric sort. It updates automatically after sorting or generating a random array.
 
-| Algorithm        | Key Notes                                        |
-| ---------------- | ------------------------------------------------ |
-| QuickSort        | Fast in practice, in-place, pivot choice matters |
-| MergeSort        | Stable, always O(n log n), needs extra memory    |
-| HeapSort         | O(n log n), in-place, not stable                 |
-| Built-in JS Sort | Highly optimized, engine-dependent strategy      |
+## Predefined Test Suite
 
-## Testing Strategy
+- "Run Tests" uses fixed test cases and is independent from the current input field.
+- Covers empty arrays, single elements, sorted/reversed arrays, duplicates, negatives, and large random inputs.
 
-- Compare custom QuickSort outputs with built-in numeric sort.
-- Cover empty input, single element, sorted, reversed, duplicates, negatives, mixed values, and large random datasets.
-- Report test name, expected output, actual output, and pass/fail.
+Run Tests uses predefined test cases and is independent from the current input.
+
+## Test Summary
+
+- Displays a summary such as "64 / 64 tests passed" at the top of the results section.
 
 ## Benchmarking Strategy
 
-- Use the same input array for all algorithms.
-- Measure each algorithm with `performance.now()`.
-- Display timing in milliseconds for easy comparison.
+- Runs all applicable algorithms on the same input array.
+- Slow algorithms (bubble, selection, insertion) may be skipped for large arrays to avoid browser freezing.
+- Small inputs may show 0.000 ms because operations are extremely fast in the browser.
+- Benchmark results may vary depending on browser, device, input size, and current system load.
+
+## Fastest Algorithm Detection
+
+- Highlights the fastest benchmark result in the UI and shows a dedicated label.
+
+## Visualization
+
+- Displays bars for original and sorted arrays.
+- Large arrays use a limited visualization for readability.
+- Bars are normalized by absolute value and negative values extend below a zero baseline.
+
+## Input Validation
+
+- Accepts numbers separated by commas.
+- Trims whitespace and rejects empty or non-numeric entries.
+- Shows clear error messages when validation fails.
+
+## Debugging and Refinement
+
+- Ensured non-mutating sorting functions for consistent benchmarking.
+- Validated outputs against built-in numeric sort.
+- Added guardrails for large inputs and slow algorithms.
 
 ## GitHub Copilot Assistance
 
-- Accelerated initial QuickSort implementation and iterative variant.
-- Helped structure the benchmark and test runner logic.
-- Assisted in refining input validation and UI update flows.
-- Suggested clear documentation sections for the lab report.
+- Accelerated QuickSort implementation and iterative variant.
+- Helped structure benchmarking and testing logic.
+- Suggested UI improvements and documentation sections.
+
+## Deployment Using GitHub Pages
+
+1. Push the project to GitHub.
+2. Go to Settings -> Pages.
+3. Select the `main` branch and the root folder.
+4. Save to publish at the GitHub Pages URL.
 
 ## Key Learnings
 

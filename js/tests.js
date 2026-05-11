@@ -10,9 +10,23 @@
   const runTests = () => {
     const lab = ensureLab();
     const largeRandom = Array.from(
-      { length: 2000 },
+      { length: 1000 },
       () => Math.floor(Math.random() * 2001) - 1000,
     );
+
+    const algorithmSuite = [
+      { name: "Recursive QuickSort", sort: lab.recursiveQuickSort },
+      { name: "Iterative QuickSort", sort: lab.iterativeQuickSort },
+      { name: "Merge Sort", sort: lab.mergeSort },
+      { name: "Heap Sort", sort: lab.heapSort },
+      { name: "Insertion Sort", sort: lab.insertionSort },
+      { name: "Selection Sort", sort: lab.selectionSort },
+      { name: "Bubble Sort", sort: lab.bubbleSort },
+      {
+        name: "Built-in JavaScript Sort",
+        sort: (arr) => arr.slice().sort((a, b) => a - b),
+      },
+    ];
 
     const tests = [
       { name: "Empty array", input: [] },
@@ -30,20 +44,14 @@
     tests.forEach((test) => {
       const expected = test.input.slice().sort((a, b) => a - b);
 
-      const actualRecursive = lab.recursiveQuickSort(test.input);
-      results.push({
-        name: `${test.name} (recursive)`,
-        passed: arraysEqual(actualRecursive, expected),
-        expected,
-        actual: actualRecursive,
-      });
-
-      const actualIterative = lab.iterativeQuickSort(test.input);
-      results.push({
-        name: `${test.name} (iterative)`,
-        passed: arraysEqual(actualIterative, expected),
-        expected,
-        actual: actualIterative,
+      algorithmSuite.forEach((algorithm) => {
+        const actual = algorithm.sort(test.input);
+        results.push({
+          name: `${test.name} (${algorithm.name})`,
+          passed: arraysEqual(actual, expected),
+          expected,
+          actual,
+        });
       });
     });
 

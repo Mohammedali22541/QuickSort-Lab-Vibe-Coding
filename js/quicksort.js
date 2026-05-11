@@ -71,4 +71,5 @@
   window.quickSortLab = window.quickSortLab || {};
   window.quickSortLab.recursiveQuickSort = recursiveQuickSort;
   window.quickSortLab.iterativeQuickSort = iterativeQuickSort;
+  window.quickSortLab.pivotStrategy = "Middle element";
 })();
