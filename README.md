@@ -2,7 +2,7 @@
 
 ## Live Demo
 
-- https://<your-username>.github.io/QuickSort-Lab/
+-[ https://<your-username>.github.io/QuickSort-Lab/](https://mohammedali22541.github.io/QuickSort-Lab-Vibe-Coding/)
 
 ## GitHub Repository
 
